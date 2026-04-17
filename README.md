@@ -28,7 +28,7 @@ The class name assignment, as already mentioned, is fully automated, so you can 
 The actual model training is done entirely within this Jupiter notebook [file](training/training.ipynb), which explains the steps pretty well on its own. If you don't know how to open it, you can either:
 
 - open it in VS Code using the official [extension](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter)
-- open [Google Colab](https://colab.research.google.com/), go to File > Open notebook, select the GitHub tab and paste this repo's link
+- open [Google Colab](https://colab.research.google.com/), go to File > Open notebook, select the GitHub tab and paste this repo's link (note: there's a couple different projects with similar names and Colab sometimes gets confused. Ensure the SoundRecognition repository is the selected one before loading the notebook) 
 
 Once executed all the cells, the script will directly export the model to a C++ header file `model.h` and the mfcc constants in the file `mfcc_constants.h`, which will both be used in the next step. A `.tflite` file is also generated, but you can ignore it.
 
