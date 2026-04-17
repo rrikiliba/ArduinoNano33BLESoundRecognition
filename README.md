@@ -30,7 +30,7 @@ The actual model training is done entirely within this Jupiter notebook [file](t
 - open it in VS Code using the official [extension](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter)
 - open [Google Colab](https://colab.research.google.com/), go to File > Open notebook, select the GitHub tab and paste this repo's link
 
-Once executed all the cells, the script will directly export the model to a C++ header file `gesture_recognition.h` and the mfcc constants in the file `mfcc_constants.h`, which will both be used in the next step. A `.tflite` file is also generated, but you can ignore it.
+Once executed all the cells, the script will directly export the model to a C++ header file `model.h` and the mfcc constants in the file `mfcc_constants.h`, which will both be used in the next step. A `.tflite` file is also generated, but you can ignore it.
 
 Make sure to generally follow the instructions in the notebook and, once you obtain your `.h` files, place them in this [folder](inference) (if the notebook is executed locally, they will be placed there automatically)
 
