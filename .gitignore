@@ -1,0 +1,10 @@
+.venv
+todo*
+*.csv
+model.h
+mfcc_constants.h
+*.tflite
+*.zip
+*.pdf
+*.bak
+dataset
