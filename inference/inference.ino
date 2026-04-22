@@ -99,7 +99,7 @@ void setup() {
     Serial.println("Error: Failed to start PDM!");
     while (1);
   }
-  
+
   Serial.println("System Ready. Listening for audio...");
 }
 
