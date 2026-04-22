@@ -93,13 +93,13 @@ void setup() {
 
   Serial.println("Initializing Microphone...");
   PDM.onReceive(onPDMdata);
-  PDM.setGain(20);
+  PDM.setGain(15);
   
   if (!PDM.begin(1, SAMPLE_RATE)) {
     Serial.println("Error: Failed to start PDM!");
     while (1);
   }
-
+  
   Serial.println("System Ready. Listening for audio...");
 }
 

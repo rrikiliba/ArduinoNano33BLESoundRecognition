@@ -39,10 +39,23 @@ void mfcc_compute(const int16_t* audio_buffer, TfLiteTensor* input_tensor) {
     float val = fabs((float)audio_buffer[i] - global_mean);
     if (val > max_amp) max_amp = val;
   }
+
+  //Noise gate
+  if (max_amp < 350.0f) {
+    for (int i = 0; i < input_tensor->bytes; i++) {
+      input_tensor->data.int8[i] = input_tensor->params.zero_point;
+    }
+    return;
+  }
+
+  float volume_scale = 0;
   
   // prevent division by zero and match Python's dynamic range
-  if (max_amp < 100.0f) max_amp = 100.0f; 
-  float volume_scale = 1.0f / max_amp;
+  if (max_amp < 800.0f) {
+    volume_scale = 1.0f / 1200.0f; 
+  } else {
+    volume_scale = 1.0f / max_amp;
+  }
 
   int expected_frames = input_tensor->dims->data[1]; 
 
@@ -80,7 +93,7 @@ void mfcc_compute(const int16_t* audio_buffer, TfLiteTensor* input_tensor) {
     float mfcc[NUM_MFCC] = {0};
     for (int i = 0; i < NUM_MEL_BINS; i++) {
       // Add a small epsilon to prevent log(0) which causes -Infinity and breaks everything
-      float log_mel = logf(mel_energies[i] + 1e-7f);
+      float log_mel = logf(mel_energies[i] + 1e-6f);
       for (int j = 0; j < NUM_MFCC; j++) {
         mfcc[j] += log_mel * dct_matrix[i * NUM_MFCC + j];
       }
