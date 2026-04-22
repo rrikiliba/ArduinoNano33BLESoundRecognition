@@ -15,7 +15,7 @@ Data gathering was done via the software [Audacity](https://www.audacityteam.org
 
 By setting the sample rate to 16kHz and a mono audio channel, any PC microphone can be used to record data, while maintaining fidelity with the microphone on the Arduino device the model is deployed on.
 
-The first results were obtained with just 1 minute of recorded samples for each class. Classes with high energy spikes like 'clap' and 'snap' were recorded at 60bpm, while constant low noises like 'rub' and 'silence' were recorded for minutes straight while continuously generating the noise. 
+The first results were obtained with just 1 minute of recorded samples for each class. Classes with high energy spikes like 'clap' and 'snap' were recorded at 60bpm, while constant low noises like 'rub' and 'silence' were recorded for minutes straight while continuously generating the noise.
 
 Additionally, for some classes we were able to procure additional training data from the public dataset "hands make sounds", from [99Sounds](https://99sounds.org/hands-make-sounds/)
 
@@ -28,7 +28,7 @@ The class name assignment, as already mentioned, is fully automated, so you can 
 The actual model training is done entirely within this Jupiter notebook [file](training/training.ipynb), which explains the steps pretty well on its own. If you don't know how to open it, you can either:
 
 - open it in VS Code using the official [extension](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter)
-- open [Google Colab](https://colab.research.google.com/), go to File > Open notebook, select the GitHub tab and paste this repo's link (note: there's a couple different projects with similar names and Colab sometimes gets confused. Ensure the SoundRecognition repository is the selected one before loading the notebook) 
+- open [Google Colab](https://colab.research.google.com/), go to File > Open notebook, select the GitHub tab and paste this repo's link (note: there's a couple different projects with similar names and Colab sometimes gets confused. Ensure the SoundRecognition repository is the selected one before loading the notebook)
 
 Once executed all the cells, the script will directly export the model to a C++ header file `model.h` and the mfcc constants in the file `mfcc_constants.h`, which will both be used in the next step. A `.tflite` file is also generated, but you can ignore it.
 
@@ -38,4 +38,10 @@ Make sure to generally follow the instructions in the notebook and, once you obt
 
 Once you have your C++ header files in the inference [folder](inference), you can open the folder as an Arduino Sketch, compile it and load it to the device via Arduino tools (such as Arduino IDE or Cloud).
 
-Tuning into the serial output of the board will allow you to see inference for every detected sound. 
+Tuning into the serial output of the board will allow you to see inference for every detected sound.
+
+## 4. Training dataset
+
+The model has been trained with the datasets in the dataset branch.
+
+The model behaves well when trained with 4 or less distinct classes; it was tested with 2 different configurations, but the best results where obtained with (clap, snap, silence, tap). It was also tested on 5 classes, but silence and rub class tended to overlap significantly.
