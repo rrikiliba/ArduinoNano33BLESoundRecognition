@@ -5,4 +5,8 @@ This branch contains the wav files we used to train our model. As of now, the fo
 - silence
 - snap
 - clap
+- tap
+
+Another separate folder contains the following samples:
+
 - rub
